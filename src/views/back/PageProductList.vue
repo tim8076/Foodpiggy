@@ -68,9 +68,9 @@
           </tr>
         </tbody>
       </table>
-      <Pagination :pages="pagination"
-                  @emit-page="getProducts"
-                  v-show="!searchText"/>
+      <BasePagination :pages="pagination"
+                      @emit-page="getProducts"
+                      v-show="!searchText"/>
       <ProductModal ref="productModal"
                     :product="tempProduct"
                     @update-product="sendProduct"/>
@@ -81,7 +81,7 @@
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
 import ProductModal from '@/components/back/ProductModal.vue';
-import Pagination from '@/components/Pagination.vue';
+import BasePagination from '@/components/BasePagination.vue';
 
 export default {
   data() {
@@ -114,7 +114,7 @@ export default {
   },
   components: {
     ProductModal,
-    Pagination,
+    BasePagination,
   },
   methods: {
     ...mapActions('adminProductlists', [
