@@ -1,0 +1,28 @@
+
+//sidebar
+.page-dashboard .dashboard-sidebar{
+  position: fixed;
+  top: 72px;
+  left: -100%;
+  transition: $transition-base;
+  min-height: calc(100vh - 72px);
+  @include media-breakpoint-up(lg){
+    position: static;
+  }
+  .sidebar-list__item:hover a,
+  .router-link-exact-active{
+    color: $primary;
+  }
+}
+.page-dashboard.active .dashboard-sidebar{
+  left: 0;
+}
+
+//content-area
+.dashboard-content{
+  height: calc(100vh - 72px);
+  overflow: scroll;
+}
+.dashboard-content .page-productList{
+  min-width: 768px;
+}

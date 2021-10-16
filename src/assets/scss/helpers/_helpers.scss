@@ -1,0 +1,37 @@
+.bg-cover{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-cover{
+  object-fit: cover !important;
+}
+
+.logo-title{
+  width: 180px;
+  height: 64px;
+  display: block;
+  background-image: url('./assets/images/logo/main-logo.png');
+}
+
+.swal2-container {
+  z-index: 10000;
+}
+
+.text-overflow{
+  text-indent:101%; /*首行縮排*/
+  overflow:hidden; /*自動隱藏超出的文字或圖片*/
+  white-space:nowrap; /*希望元素在第一排上面，沒有斷行*/
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

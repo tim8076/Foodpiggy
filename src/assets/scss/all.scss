@@ -1,0 +1,24 @@
+
+@import "~bootstrap/scss/functions";
+@import "./helpers/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "./helpers/utils";
+@import "~bootstrap/scss/bootstrap";
+
+//base
+@import "./base/base";
+
+//components
+@import "./components/button";
+
+//pages
+@import "./pages/back/login";
+@import "./pages/back/dashboard";
+
+
+//helpers
+@import "./helpers/helpers";
+
+//vendor
+@import "./vendor/loading";
