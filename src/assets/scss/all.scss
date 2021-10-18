@@ -11,15 +11,15 @@
 
 //components
 @import "./components/button";
-@import "./components/front/header";
-
-//pages
-@import "./pages/back/login";
-@import "./pages/back/dashboard";
-
 
 //helpers
 @import "./helpers/helpers";
 
 //vendor
 @import "./vendor/loading";
+@import "./vendor/swiper";
+
+//pages
+@import "./pages/front/pageIndex";
+@import "./pages/back/login";
+@import "./pages/back/dashboard";

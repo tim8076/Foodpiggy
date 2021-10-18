@@ -13,7 +13,7 @@
     "bootstrap": "^5.1.1",
     "core-js": "^3.6.5",
     "sweetalert2": "^11.1.7",
-    "swiper": "^7.0.8",
+    "swiper": "^6.8.4",
     "vue": "^3.0.0",
     "vue-axios": "^3.3.7",
     "vue-router": "^4.0.0-0",

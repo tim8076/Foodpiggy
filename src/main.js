@@ -6,13 +6,28 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'bootstrap';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+
+// import Swiper core and required modules
+import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// swiper bundle styles
+import 'swiper/swiper-bundle.min.css';
+// modules styles
+import 'swiper/components/navigation/navigation.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+
 import swal from './components/swal.vue';
 import commonMethods from './mixins/commonMethods';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 
+SwiperCore.use([Navigation, Pagination, Autoplay]);
+
 const app = createApp(App);
+
 // 載入全域 mixin
 app.mixin({
   mixins: [swal, commonMethods],
@@ -23,4 +38,6 @@ app.use(router);
 app.use(VueSweetalert2);
 app.use(VueAxios, axios);
 app.component('Loading', Loading);
+app.component('Swiper', Swiper);
+app.component('SwiperSlide', SwiperSlide);
 app.mount('#app');

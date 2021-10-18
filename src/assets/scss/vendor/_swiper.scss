@@ -1,0 +1,8 @@
+// pagination bullet color
+.swiper-pagination-bullet{
+  width: 12px;
+  height: 12px;
+  &-active{
+    background-color: $primary;
+  }
+}
