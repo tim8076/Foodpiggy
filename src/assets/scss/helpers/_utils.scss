@@ -625,6 +625,12 @@ $utilities: map-merge(
       class: cursor,
       responsive: true,
       values: auto pointer grab not-allowed,
+    ),
+    "z-index": (
+      property: z-index,
+      class: z-index,
+      responsive: true,
+      values: 1000 1030,
     )
     // scss-docs-end utils-visibility
   ),

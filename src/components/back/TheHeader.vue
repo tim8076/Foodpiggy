@@ -2,7 +2,7 @@
   <header class="bg-secondary py-1">
     <div class="container d-flex justify-content-between">
       <h1>
-        <router-link to="/" class="logo-title text-overflow bg-cover">
+        <router-link to="/index/home" class="logo-title text-overflow bg-cover">
           foodpiggy 美食外送平台
         </router-link>
       </h1>

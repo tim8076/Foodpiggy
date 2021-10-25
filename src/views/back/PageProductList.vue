@@ -159,9 +159,6 @@ export default {
       const vm = this;
       this.allProducts.forEach((item) => {
         const product = item;
-        if (!product.title === '德璐莎咖啡') {
-          product.is_superior = true;
-        }
         vm.updateProduct({ tempProduct: product, isNew: false });
       });
     },

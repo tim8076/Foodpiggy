@@ -68,7 +68,8 @@ $colors: (
 
 // scss-docs-start theme-color-variables
 $primary:       #ff007e !default;
-$secondary:     #ffe9f4!default;
+$secondary:     #ffe9f4 !default;
+$thirdly:       #276FBF !default;
 $light:         #fff !default;
 $dark:          #000 !default;
 $success:       $green !default;
@@ -81,6 +82,7 @@ $danger:        $red !default;
 $theme-colors: (
   "primary":    $primary,
   "secondary":  $secondary,
+  "thirdly":    $thirdly,
   "success":    $success,
   "gray":       $gray-100,
   "gray-medium": $gray-300,
@@ -350,7 +352,7 @@ $enable-smooth-scroll:        true !default;
 $enable-grid-classes:         true !default;
 $enable-cssgrid:              false !default;
 $enable-button-pointers:      true !default;
-$enable-rfs:                  true;//true !default;
+$enable-rfs:                  true; //true !default;
 $enable-validation-icons:     true !default;
 $enable-negative-margins:     false !default;
 $enable-deprecation-messages: true !default;
@@ -397,7 +399,7 @@ $spacers: (
   17: $spacer * 4.25, //68px
   18: $spacer * 4.5,  //72px
   19: $spacer * 4.75, //76px
-  20: $spacer * 5,    //px
+  20: $spacer * 5,    //80px
 ) !default;
 
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
@@ -410,6 +412,8 @@ $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) 
 // scss-docs-start position-map
 $position-values: (
   0: 0,
+  5: 5%,
+  10: 10%,
   50: 50%,
   100: 100%
 ) !default;
@@ -548,7 +552,7 @@ $border-color:                $gray-300 !default;
 // scss-docs-start border-radius-variables
 $border-radius:               .25rem !default;
 $border-radius-sm:            .2rem !default;
-$border-radius-lg:            .3rem !default;
+$border-radius-lg:            .5rem; //.3rem !default;
 $border-radius-pill:          50rem !default;
 // scss-docs-end border-radius-variables
 
@@ -624,6 +628,7 @@ $h2-font-size:                $font-size-base * 2 !default;  //32
 $h3-font-size:                $font-size-base * 1.5 !default; //24
 $h4-font-size:                $font-size-base * 1.25 !default; //20
 $h5-font-size:                $font-size-base !default; //16
+$h6-font-size:                $font-size-base * 0.875 !default; //14
 // scss-docs-end font-variables
 
 // scss-docs-start font-sizes
@@ -633,6 +638,7 @@ $font-sizes: (
   3: $h3-font-size, //24
   4: $h4-font-size, //20
   5: $h5-font-size, //16
+  6: $h6-font-size, // 14
 ) !default;
 // scss-docs-end font-sizes
 

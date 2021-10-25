@@ -5,3 +5,14 @@
     height: calc(100vh - 80px);
   }
 }
+
+// 食物類別頁面
+.page-category,
+.page-favorites{
+  .jumbotron{
+    height: 160px;
+    @include media-breakpoint-up(md){
+      height: 240px;
+    }
+  }
+}
