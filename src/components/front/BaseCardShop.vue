@@ -1,6 +1,7 @@
 <template>
   <div class="card card__shop">
-    <router-link class="link" to="/" />
+    <router-link class="link"
+                 :to="{ name: 'indexshop', params: { shop: shopData.title } }" />
     <a href="#"
        class="heart position-absolute top-5 end-5 fs-4 text-primary z-index-1000"
        v-show="!active"

@@ -1,0 +1,14 @@
+.offcanvas__cart{
+  .offcanvas-image{
+    width: 100px;
+    height: 100px;
+    @include media-breakpoint-up(md) {
+      width: 125px;
+      height: 125px;  
+    }
+  }
+  .btn:focus {
+    outline: none !important;
+    border: none !important;
+  }
+}

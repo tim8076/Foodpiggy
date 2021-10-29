@@ -145,6 +145,7 @@ $utilities: map-merge(
     // scss-docs-start utils-sizing
     "width": (
       property: width,
+      responsive: true,
       class: w,
       values: (
         25: 25%,
@@ -630,7 +631,7 @@ $utilities: map-merge(
       property: z-index,
       class: z-index,
       responsive: true,
-      values: 1000 1030,
+      values: 1000 1030 1040 1045 9999,
     )
     // scss-docs-end utils-visibility
   ),

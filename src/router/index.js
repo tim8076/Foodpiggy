@@ -17,8 +17,13 @@ const routes = [
         component: () => import('../views/front/PageCategory.vue'),
       },
       {
+        path: 'shop/:shop',
+        name: 'indexshop',
+        component: () => import('../views/front/PageShop.vue'),
+      },
+      {
         path: 'favorite',
-        name: 'favorite',
+        name: 'indexFavorite',
         component: () => import('../views/front/PageFavorite.vue'),
       },
     ],

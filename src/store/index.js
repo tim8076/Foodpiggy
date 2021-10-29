@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 
 // 前台模組
 import frontProducts from './front/products';
+import frontCart from './front/cart';
 import localStorage from './front/localStorage';
 // 後台模組
 import adminProductlists from './back/products';
@@ -52,6 +53,7 @@ export default createStore({
   },
   modules: {
     frontProducts,
+    frontCart,
     localStorage,
     adminProductlists,
   },

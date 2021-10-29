@@ -8,7 +8,8 @@
 
 // 食物類別頁面
 .page-category,
-.page-favorites{
+.page-favorites,
+.page-shop{
   .jumbotron{
     height: 160px;
     @include media-breakpoint-up(md){
