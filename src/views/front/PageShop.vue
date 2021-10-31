@@ -112,6 +112,7 @@ export default {
     },
     async addOrder(order) {
       await this.addToCart(order);
+      this.$refs.foodModal.hideModal();
     },
   },
   created() {

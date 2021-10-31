@@ -2,6 +2,8 @@
   <div class="page-home">
     <SwiperJumbotron class="mb-12 mb-md-20"/>
     <div class="container">
+      <section>
+      </section>
       <section class="mb-6 mb-lg-8">
         <h2 class="mb-3 fw-normal">超人氣餐廳</h2>
         <SwiperShops :shops="hotShops" />

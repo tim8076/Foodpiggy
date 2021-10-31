@@ -14,6 +14,10 @@ export default {
         filename: 'japan',
       },
       {
+        type: '美式料理',
+        filename: 'america',
+      },
+      {
         type: '甜點-下午茶',
         filename: 'dessert',
       },

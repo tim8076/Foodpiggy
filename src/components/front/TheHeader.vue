@@ -15,9 +15,14 @@
                         :to="{ name: 'indexFavorite' }">
               <i class="far fa-heart fs-3 text-primary"></i>
             </router-link>
-            <button class="btn px-3"
+            <button class="btn position-relative px-3"
                     @click="toggleCart">
               <i class="fas fa-shopping-cart fs-3 text-primary"></i>
+              <span v-if="cartList.length"
+                    class="position-absolute top-10 start-80
+                           translate-middle badge rounded-circle bg-primary">
+                {{ cartList.length }}
+              </span>
             </button>
           </div>
         </div>

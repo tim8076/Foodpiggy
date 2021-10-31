@@ -68,7 +68,7 @@ $colors: (
 
 // scss-docs-start theme-color-variables
 $primary:       #ff007e !default;
-$secondary:     #ffe9f4 !default;
+$secondary:     #fff1f8 !default;
 $thirdly:       #276FBF !default;
 $light:         #fff !default;
 $dark:          #000 !default;
@@ -416,6 +416,7 @@ $position-values: (
   5: 5%,
   10: 10%,
   50: 50%,
+  80: 80%,
   100: 100%
 ) !default;
 // scss-docs-end position-map

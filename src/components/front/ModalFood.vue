@@ -10,8 +10,8 @@
                :src="foodData.imageUrl"
                :alt="foodData.title">
           <button type="button"
-                  class="btn p-2 position-absolute top-5 end-5
-                         bg-white rounded-circle"
+                  class="btn p-2 position-absolute top-2 end-2
+                         bg-white rounded-circle lh-1"
                   @click="hideModal">
             <i class="fas fa-times text-dark fs-3"></i>
           </button>
@@ -26,18 +26,21 @@
         </div>
         <div class="modal-footer py-6">
           <div class="container-fluid">
-            <div class="row">
+            <div class="row justify-content-between">
               <p class="mb-3">請輸入訂購數量</p>
-              <div class="col-md-6">
-                 <div class="input-group mb-3">
-                    <button class="btn btn-secondary text-gray-dark"
+              <div class="col-md-5">
+                 <div class="input-group mb-6">
+                    <div :class="{ 'cursor-not-allowed': orderNum <= 1 }">
+                      <button class="btn btn-secondary text-gray-dark"
+                            :class="{ disabled : orderNum <= 1 }"
                             type="button"
                             @click.prevent="setOrderNum(-1)">
-                      <i class="fas fa-minus"></i>
-                    </button>
+                        <i class="fas fa-minus"></i>
+                      </button>
+                    </div>
                     <input type="number"
                            min="1"
-                           class="form-control"
+                           class="form-control text-center"
                            v-model.number="orderNum">
                     <button class="btn btn-secondary text-gray-dark"
                             type="button"
@@ -46,11 +49,11 @@
                     </button>
                   </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <button type="button"
-                        class="btn btn-primary d-block ms-auto"
+                        class="btn btn-primary w-100 w-md-auto d-block ms-auto"
                         @click="comfirmOrder">
-                  確認送出
+                  加入購物車
                 </button>
               </div>
             </div>
@@ -99,7 +102,10 @@ export default {
       this.orderNum += num;
     },
     comfirmOrder() {
-      if (this.orderNum < 1) return;
+      if (this.orderNum < 1) {
+        this.$_swal('訂購數量小於1', 'error');
+        return;
+      }
       this.$emit('sendOrder', {
         productId: this.foodData.id,
         qty: this.orderNum,

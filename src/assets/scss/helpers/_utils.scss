@@ -1,5 +1,6 @@
 // stylelint-disable-next-line scss/dollar-variable-default
 $utilities: map-merge(
+  $utilities,
   (
     // scss-docs-start utils-vertical-align
     "align": (
@@ -62,23 +63,28 @@ $utilities: map-merge(
     // scss-docs-start utils-position
     "position": (
       property: position,
+      responsive: true,
       values: static relative absolute fixed sticky
     ),
     "top": (
       property: top,
+      responsive: true,
       values: $position-values
     ),
     "bottom": (
       property: bottom,
+      responsive: true,
       values: $position-values
     ),
     "start": (
       property: left,
+      responsive: true,
       class: start,
       values: $position-values
     ),
     "end": (
       property: right,
+      responsive: true,
       class: end,
       values: $position-values
     ),
@@ -579,6 +585,7 @@ $utilities: map-merge(
     // scss-docs-start utils-border-radius
     "rounded": (
       property: border-radius,
+      responsive: true,
       class: rounded,
       values: (
         null: $border-radius,
@@ -634,6 +641,5 @@ $utilities: map-merge(
       values: 1000 1030 1040 1045 9999,
     )
     // scss-docs-end utils-visibility
-  ),
-  $utilities
+  )
 );

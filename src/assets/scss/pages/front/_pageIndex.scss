@@ -2,7 +2,16 @@
 // 首頁
 .page-home{
   .jumbotronSwiper{
-    height: calc(100vh - 80px);
+    height: calc(50vh - 80px);
+    @include media-breakpoint-up(sm){
+      height: calc(80vh - 80px);
+    }
+    @include media-breakpoint-up(md){
+      height: calc(50vh - 80px);
+    }
+    @include media-breakpoint-up(lg){
+      height: calc(70vh - 80px);
+    }
   }
 }
 

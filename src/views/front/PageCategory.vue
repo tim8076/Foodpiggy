@@ -1,10 +1,18 @@
 <template>
   <div class="page-category">
-    <div class="jumbotron bg-cover
+    <div v-if="typeName"
+         class="jumbotron bg-cover
                 d-flex justify-content-center align-items-center mb-12"
          :style="{ backgroundImage:
          `url(${require(`@/assets/images/index/categories/${typeName}/cover.jpg`)})` }">
       <h2 class="display-5 text-primary p-3 bg-secondary">{{ category }}</h2>
+    </div>
+    <div v-else
+        class="jumbotron bg-cover
+              d-flex justify-content-center align-items-center mb-12"
+        :style="{ backgroundImage:
+        `url(${require(`@/assets/images/index/categories/taiwanese/cover.jpg`)})` }">
+      <h2 class="display-5 text-primary p-3 bg-secondary">精選美食</h2>
     </div>
     <div class="container">
       <h2 class="mb-3 fw-normal">餐廳列表</h2>
@@ -40,10 +48,15 @@ export default {
       'shopList',
     ]),
     typeName() {
-      return this.categoryImages.find((item) => item.type === this.category).filename;
+      return this.categoryImages.find((item) => item.type === this.category)?.filename;
     },
     filterShops() {
-      return this.shopList.filter((shop) => shop.category === this.category);
+      return this.shopList.filter((shop) => {
+        const key = this.category;
+        return shop.category.match(key)
+              || shop.shop.title.match(key)
+              || shop.subCategory.match(key);
+      });
     },
   },
   methods: {
