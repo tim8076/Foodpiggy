@@ -7,7 +7,6 @@ export default {
     $_uploadImage(file) {
       const formData = new FormData();
       formData.append('file-to-upload', file);
-      this.$refs.shopFileInput.value = null;
       this.$refs.fileInput.value = null;
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
       return axios.post(api, formData);
@@ -22,6 +21,11 @@ export default {
     $_date(time) {
       const localDate = new Date(time * 1000);
       return localDate.toLocaleDateString();
+    },
+    // 日期轉換成timestamp
+    $_timestamp(date) {
+      const dateTime = new Date(date).getTime();
+      return Math.floor(dateTime / 1000);
     },
     // 產生有分頁的陣列
     $_createPages(array, currentPage) {

@@ -1,16 +1,12 @@
 <template>
   <div class="modal fade"
-       id="exampleModal"
        tabindex="-1"
-       aria-labelledby="exampleModalLabel"
-       aria-hidden="true"
        ref="modal">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header bg-secondary">
-          <h3 class="modal-title text-primary"
-              id="exampleModalLabel">
-            建立商品
+          <h3 class="modal-title text-primary">
+            {{ modalTitle }}
           </h3>
           <button type="button"
                   class="btn-close"
@@ -239,6 +235,10 @@ export default {
       type: Object,
       default() { return {}; },
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   mixins: [
     commonMethods,
@@ -267,6 +267,9 @@ export default {
         valid = true;
       }
       return valid;
+    },
+    modalTitle() {
+      return this.isNew ? '建立產品' : '編輯產品';
     },
   },
   watch: {
@@ -299,9 +302,9 @@ export default {
         } else {
           this.$_swal(res.data.message, 'error');
         }
-        this.$store.commit('CHANGE_LOADING', false);
       } catch (err) {
         this.$_swal(err, 'error');
+      } finally {
         this.$store.commit('CHANGE_LOADING', false);
       }
     },

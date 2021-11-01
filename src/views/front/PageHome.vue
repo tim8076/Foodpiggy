@@ -3,6 +3,7 @@
     <SwiperJumbotron class="mb-12 mb-md-20"/>
     <div class="container">
       <section>
+        <SwiperNews />
       </section>
       <section class="mb-6 mb-lg-8">
         <h2 class="mb-3 fw-normal">超人氣餐廳</h2>
@@ -35,6 +36,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import SwiperJumbotron from '@/components/front/SwiperJumbotron.vue';
+import SwiperNews from '@/components/front/BaseCardNews.vue';
 import SwiperShops from '@/components/front/SwiperShops.vue';
 import SwiperCategory from '@/components/front/SwiperCategory.vue';
 import BaseCardShop from '@/components/front/BaseCardShop.vue';
@@ -42,6 +44,7 @@ import BaseCardShop from '@/components/front/BaseCardShop.vue';
 export default {
   components: {
     SwiperJumbotron,
+    SwiperNews,
     SwiperShops,
     SwiperCategory,
     BaseCardShop,

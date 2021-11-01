@@ -6,6 +6,7 @@ import frontCart from './front/cart';
 import localStorage from './front/localStorage';
 // 後台模組
 import adminProductlists from './back/products';
+import adminArticles from './back/articles';
 
 export default createStore({
   state: {
@@ -56,5 +57,6 @@ export default createStore({
     frontCart,
     localStorage,
     adminProductlists,
+    adminArticles,
   },
 });

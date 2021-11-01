@@ -1,6 +1,6 @@
 <template>
   <nav class="dashboard-sidebar bg-light">
-    <ul class="sidebar-list pt-8 ps-6 pe-16">
+    <ul class="sidebar-list pt-8 ps-6 pe-12">
       <li class="sidebar-list__item mb-8 fs-4">
         <router-link :to="{ name: 'dashboardProducts' }">
           <i class="fas fa-tags me-2"></i>
@@ -14,9 +14,15 @@
         </router-link>
       </li>
       <li class="sidebar-list__item mb-8 fs-4">
+        <router-link :to="{ name: 'dashboardArticles' }">
+          <i class="fas fa-ticket-alt me-2"></i>
+          文章列表
+        </router-link>
+      </li>
+      <li class="sidebar-list__item mb-8 fs-4">
         <router-link to="/">
           <i class="fas fa-ticket-alt me-2"></i>
-          優惠券列表
+          優惠券
         </router-link>
       </li>
       <li class="sidebar-list__item mb-8 fs-4">

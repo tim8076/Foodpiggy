@@ -36,8 +36,8 @@ export default {
         });
     },
     getProducts({ dispatch, commit }, page = 1) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       commit('CHANGE_LOADING', true, { root: true });
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       axios.get(api)
         .then((res) => {
           commit('CHANGE_LOADING', false, { root: true });

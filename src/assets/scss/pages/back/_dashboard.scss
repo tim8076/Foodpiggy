@@ -8,6 +8,7 @@
   min-height: calc(100vh - 72px);
   @include media-breakpoint-up(lg){
     position: static;
+    min-width: 240px;
   }
   .sidebar-list__item:hover a,
   .router-link-exact-active{
