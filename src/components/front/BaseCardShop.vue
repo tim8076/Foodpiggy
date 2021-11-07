@@ -40,7 +40,7 @@
         </p>
       </div>
       <p class="card-text fw-light text-gray-dark">
-       {{ shop.category }} , {{ shop.subCategory }}
+       {{ shop.shop.price }} {{ shop.category }} , {{ shop.subCategory }}
       </p>
     </div>
   </div>

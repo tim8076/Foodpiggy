@@ -1,17 +1,19 @@
 <template>
   <div class="page-home">
-    <SwiperJumbotron class="mb-12 mb-md-20"/>
+    <SwiperJumbotron class="mb-8 mb-md-20"/>
     <div class="container">
-      <section>
-        <SwiperNews />
+      <section class="mb-6 mb-lg-8">
+        <SwiperNews :news="articles"/>
       </section>
       <section class="mb-6 mb-lg-8">
         <h2 class="mb-3 fw-normal">超人氣餐廳</h2>
-        <SwiperShops :shops="hotShops" />
+        <SwiperShops :shops="hotShops"
+                     :scroll="false" />
       </section>
       <section class="mb-6 mb-lg-8">
         <h2 class="mb-3 fw-normal">新上市</h2>
-        <SwiperShops :shops="newShops" />
+        <SwiperShops :shops="newShops"
+                     :scroll="false" />
       </section>
       <section class="mb-6 mb-lg-8">
         <h2 class="mb-3 fw-normal">在家吃遍全世界</h2>
@@ -34,9 +36,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import {
+  mapState, mapActions, mapGetters, mapMutations,
+} from 'vuex';
 import SwiperJumbotron from '@/components/front/SwiperJumbotron.vue';
-import SwiperNews from '@/components/front/BaseCardNews.vue';
+import SwiperNews from '@/components/front/SwiperNews.vue';
 import SwiperShops from '@/components/front/SwiperShops.vue';
 import SwiperCategory from '@/components/front/SwiperCategory.vue';
 import BaseCardShop from '@/components/front/BaseCardShop.vue';
@@ -50,6 +54,9 @@ export default {
     BaseCardShop,
   },
   computed: {
+    ...mapState('frontArticle', [
+      'articles',
+    ]),
     ...mapGetters('frontProducts', [
       'shopList',
       'foodCategory',
@@ -68,6 +75,9 @@ export default {
     ...mapActions('frontProducts', [
       'getAllProducts',
     ]),
+    ...mapActions('frontArticle', [
+      'getArticles',
+    ]),
     addToFavorite(title) {
       this.ADD_Favorite_Products({ title });
     },
@@ -78,6 +88,7 @@ export default {
   created() {
     this.getAllProducts();
     this.getFavoriteProducts();
+    this.getArticles();
   },
 };
 </script>

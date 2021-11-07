@@ -15,6 +15,11 @@
         </div>
         <button class="btn btn-primary py-2 flex-shrink-0 ms-3"
               type="button"
+              @click="toggleShopData">
+            切換顯示店家物件
+        </button>
+        <button class="btn btn-primary py-2 flex-shrink-0 ms-3"
+              type="button"
               @click="openModal(true)">
               新增商品
         </button>
@@ -33,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="product in productsList"
+        <tr v-for="product in productData"
             :key="product.id">
           <th scope="row" class="text-primary">{{ product.category }}</th>
           <td>{{ product.shop.title }}</td>
@@ -91,10 +96,17 @@ export default {
           imageUrl: '',
           title: '',
           star: 1,
+          businessHours: {
+            open: '',
+            close: '',
+          },
+          comments: [],
         },
       },
       isNew: false,
       searchText: '',
+      getShop: false,
+      shopList: [],
     };
   },
   computed: {
@@ -109,6 +121,14 @@ export default {
     productsList() {
       if (!this.searchText) return this.products;
       return this.getSearchProducts(this.searchText);
+    },
+    productData() {
+      if (!this.getShop) return this.productsList;
+      this.allProducts.forEach((product) => {
+        const index = this.shopList.map((shop) => shop.shop.title).indexOf(product.shop.title);
+        if (index === -1) this.shopList.push(product);
+      });
+      return this.shopList;
     },
   },
   components: {
@@ -129,6 +149,11 @@ export default {
             imageUrl: '',
             title: '',
             star: 1,
+            comments: [],
+            businessHours: {
+              open: '',
+              close: '',
+            },
           },
         };
       } else {
@@ -154,17 +179,22 @@ export default {
         this.$_swal(err, 'error');
       }
     },
+    toggleShopData() {
+      this.getShop = !this.getShop;
+    },
     setItems() {
       const vm = this;
       this.allProducts.forEach((item) => {
         const product = item;
+        product.shop.comments = [];
         vm.updateProduct({ tempProduct: product, isNew: false });
       });
     },
   },
-  created() {
-    this.getProducts();
-    this.getAllProducts();
+  async created() {
+    await this.getProducts();
+    await this.getAllProducts();
+    this.setItems();
   },
 };
 </script>

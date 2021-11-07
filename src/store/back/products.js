@@ -40,7 +40,6 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       axios.get(api)
         .then((res) => {
-          commit('CHANGE_LOADING', false, { root: true });
           if (res.data.success) {
             commit('SET_PRODUCTS', res);
             commit('SET_PAGINATIONS', res);
@@ -50,6 +49,8 @@ export default {
         })
         .catch((err) => {
           dispatch('callSwal', { msg: err, icon: 'error' }, { root: true });
+        })
+        .finally(() => {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },
@@ -67,7 +68,6 @@ export default {
         data: tempProduct,
       })
         .then((res) => {
-          commit('CHANGE_LOADING', false, { root: true });
           if (res.data.success) {
             dispatch('callSwal', { msg: res.data.message }, { root: true });
             dispatch('getProducts');
@@ -77,6 +77,8 @@ export default {
         })
         .catch((err) => {
           dispatch('callSwal', { msg: err, icon: 'error' }, { root: true });
+        })
+        .finally(() => {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },
@@ -85,7 +87,6 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${id}`;
       axios.delete(api)
         .then((res) => {
-          commit('CHANGE_LOADING', false, { root: true });
           if (res.data.success) {
             dispatch('callSwal', { msg: res.data.message }, { root: true });
             dispatch('getProducts');
@@ -95,6 +96,8 @@ export default {
         })
         .catch((err) => {
           dispatch('callSwal', { msg: err, icon: 'error' }, { root: true });
+        })
+        .finally(() => {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },

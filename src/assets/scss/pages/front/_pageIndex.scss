@@ -17,12 +17,13 @@
 
 // 食物類別頁面
 .page-category,
+.page-article,
 .page-favorites,
 .page-shop{
   .jumbotron{
     height: 160px;
     @include media-breakpoint-up(md){
-      height: 240px;
+      height: 220px;
     }
   }
 }

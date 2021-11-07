@@ -1,27 +1,35 @@
 <template>
-  <div class="page-shop">
+  <div class="page-shop"
+       v-if="shopData">
     <div class="jumbotron bg-cover
                 d-flex justify-content-center align-items-center mb-6"
          :style="{ backgroundImage: `url(${coverImage})` }">
     </div>
     <div class="container">
-      <h2 class="mb-3 fw-normal">{{ shopName }}</h2>
+      <div class="d-flex align-items-end">
+        <h2 class="fw-normal me-2">{{ shopName }} </h2>
+        <button type="button"
+                class="text-decoration-underline btn p-0"
+                @click.prevent="openShopModal">
+          店家資訊
+        </button>
+      </div>
       <div class="d-flex align-items-center mb-3">
         <p class="py-2 px-3 bg-thirdly fs-6 text-white me-3"
-           v-if="shopData?.is_superior">
+           v-if="shopData.is_superior">
           piggy 特選
         </p>
         <p class="py-2 px-3 bg-primary fs-6 text-white me-3"
-           v-if="shopData?.is_new">
+           v-if="shopData.is_new">
           新上市
         </p>
         <p>
           <i class="fas fa-star text-thirdly"></i>
-          {{ shopData?.shop.star }}
+          {{ shopData.shop.star }}
         </p>
       </div>
       <p class="card-text fw-light text-gray-dark">
-       {{ shopData?.category }} , {{ shopData?.subCategory }}
+       {{ shopData.shop.price }} {{ shopData.category }} , {{ shopData.subCategory }}
       </p>
     </div>
     <hr>
@@ -41,8 +49,12 @@
       </section>
     </div>
     <ModalFood ref="foodModal"
-               :productData="foodData"
+               v-if="foodData"
+               :product-data="foodData"
                @send-order="addOrder"/>
+    <ModalShop ref="shopModal"
+               v-if="shopData"
+               :shop-data="shopData"/>
   </div>
 </template>
 
@@ -50,11 +62,13 @@
 import { mapActions, mapState } from 'vuex';
 import BaseCardFood from '@/components/front/BaseCardFood.vue';
 import ModalFood from '@/components/front/ModalFood.vue';
+import ModalShop from '@/components/front/ModalShop.vue';
 
 export default {
   components: {
     BaseCardFood,
     ModalFood,
+    ModalShop,
   },
   data() {
     return {
@@ -113,6 +127,9 @@ export default {
     async addOrder(order) {
       await this.addToCart(order);
       this.$refs.foodModal.hideModal();
+    },
+    openShopModal() {
+      this.$refs.shopModal.showModal();
     },
   },
   created() {

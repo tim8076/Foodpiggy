@@ -152,7 +152,7 @@
                          class="d-block form-control mb-3"
                          v-model.trim="tempProduct.shop.title">
                   <div class="row mb-3">
-                    <div>
+                    <div class="col-md-6">
                       <label for="shopName"
                             class="form-label">
                         店家星級(1-5顆星)
@@ -163,6 +163,45 @@
                             id="shopStar"
                             class="d-block form-control mb-3"
                             v-model.number="tempProduct.shop.star">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="shopPrice"
+                            class="form-label">
+                        店家價位
+                      </label>
+                      <select id="shopPrice"
+                              v-model.number="tempProduct.shop.price"
+                              class="d-block form-control mb-3">
+                        <option value="$">$</option>
+                        <option value="$$">$$</option>
+                        <option value="$$$">$$$</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="openTime"
+                            class="form-label">
+                        開門時間 (Am)
+                      </label>
+                      <select id="openTime"
+                              class="d-block form-control mb-3"
+                              v-model.number="tempProduct.shop.businessHours.open">
+                        <option v-for="num in 12"
+                                :key="num"
+                                :value="num"> {{ num }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="closeTime"
+                            class="form-label">
+                        關門時間 (Pm)
+                      </label>
+                      <select id="closeTime"
+                              class="d-block form-control mb-3"
+                              v-model.number="tempProduct.shop.businessHours.close">
+                       <option v-for="num in 12"
+                                :key="num"
+                                :value="num"> {{ num }}</option>
+                      </select>
                     </div>
                     <div class="col-md-6 mt-6">
                       <div class="form-check">
@@ -188,18 +227,77 @@
                         </label>
                       </div>
                     </div>
+                    <div>
+                      <label for="shop-image"
+                        class="form-label">
+                        上傳店家封面圖片
+                      </label>
+                      <input type="file"
+                            class="form-control mb-3"
+                            id="shop-image"
+                            ref="shopFileInput"
+                            @change="uploadFile('shop')">
+                      <img  class="img-fluid"
+                            :src="tempProduct.shop.imageUrl">
+                    </div>
+                    <template v-for="(item, index) in tempProduct.shop.comments"
+                              :key="item.comment">
+                      <hr class="mt-3">
+                      <h4 class="mb-3">第 {{ index + 1 }} 則評論</h4>
+                      <div class="mb-3 col-md-6">
+                        <label for="customerName"
+                              class="form-label">
+                          顧客姓名
+                        </label>
+                        <input  type="text"
+                                class="form-control"
+                                id="customerName"
+                                v-model.trim="item.name" />
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="customerScore"
+                              class="form-label">
+                          顧客給分
+                        </label>
+                        <select id="customerScore"
+                                class="form-select"
+                                v-model.number="item.star">
+                          <option  v-for="num in 5"
+                                   :key="num"
+                                   :value="num">
+                            {{ num }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="mb-3 col-md-6">
+                        <label for="customerDate"
+                              class="form-label">
+                          評論日期
+                        </label>
+                        <input  type="date"
+                                class="form-control"
+                                id="customerDate"
+                                rows="3"
+                                v-model.trim="item.date" />
+                      </div>
+                      <div class="mb-3">
+                        <label for="customerComment"
+                              class="form-label">
+                          評論內容
+                        </label>
+                        <textarea class="form-control"
+                                  id="customerComment"
+                                  rows="3"
+                                  v-model.trim="item.comment">
+                        </textarea>
+                      </div>
+                    </template>
+                    <button class="btn btn-primary"
+                            type="button"
+                            @click="addComment">
+                      新增顧客評論
+                    </button>
                   </div>
-                  <label for="shop-image"
-                       class="form-label">
-                    上傳店家封面圖片
-                  </label>
-                  <input type="file"
-                         class="form-control mb-3"
-                         id="shop-image"
-                         ref="shopFileInput"
-                         @change="uploadFile('shop')">
-                   <img  class="img-fluid"
-                         :src="tempProduct.shop.imageUrl">
               </div>
             </div>
           </div>
@@ -251,7 +349,18 @@ export default {
           imageUrl: '',
           title: '',
           star: 1,
+          comments: [],
+          businessHours: {
+            open: '',
+            close: '',
+          },
         },
+      },
+      commentObj: {
+        name: '',
+        date: '',
+        comment: '',
+        star: 1,
       },
     };
   },
@@ -283,6 +392,25 @@ export default {
   methods: {
     comfirmUpdate() {
       this.$emit('updateProduct', this.tempProduct);
+    },
+    addComment() {
+      // 第一次新增評論時，新增陣列使用
+      if (!this.tempProduct.shop.comments) {
+        this.tempProduct.shop.comments = [];
+        this.tempProduct.shop.comments.push({ ...this.commentObj });
+        return;
+      }
+      // 已經有評論時，確認內容都有填才能再新增下一筆
+      const lastIndex = this.tempProduct.shop.comments.length - 1;
+      const lastComment = this.tempProduct.shop.comments[lastIndex];
+      if (this.tempProduct.shop.comments
+          && lastComment.name
+          && lastComment.date
+          && lastComment.comment) {
+        this.tempProduct.shop.comments.push({ ...this.commentObj });
+      } else {
+        this.$_swal('還有評論內容未填', 'error');
+      }
     },
     async uploadFile(type) {
       this.$store.commit('CHANGE_LOADING', true);

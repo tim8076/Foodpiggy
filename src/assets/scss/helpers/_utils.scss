@@ -157,6 +157,7 @@ $utilities: map-merge(
         25: 25%,
         50: 50%,
         75: 75%,
+        80: 80%,
         100: 100%,
         auto: auto
       )
@@ -503,6 +504,7 @@ $utilities: map-merge(
       values: (
         wrap: normal,
         nowrap: nowrap,
+        prewrap: pre-wrap,
       )
     ),
     "word-wrap": (

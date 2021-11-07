@@ -2,10 +2,10 @@
   <swiper :slidesPerView="1.2"
           :spaceBetween="15"
           :breakpoints="breakpoints"
-          class="mySwiper">
-    <swiper-slide v-for="shop in shops"
-                  :key="shop.shop.title">
-      <BaseCardNews />
+          class="mySwiper mb-6">
+    <swiper-slide v-for="article in news"
+                  :key="article.id">
+      <BaseCardNews :article="article"/>
     </swiper-slide>
   </swiper>
 </template>
@@ -16,6 +16,12 @@ import BaseCardNews from '@/components/front/BaseCardNews.vue';
 export default {
   components: {
     BaseCardNews,
+  },
+  props: {
+    news: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {

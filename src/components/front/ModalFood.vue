@@ -1,7 +1,6 @@
 <template>
   <div  ref="modal"
         class="modal fade"
-        id="exampleModal"
         tabindex="-1">
     <div class="modal-dialog modal modal-dialog-centered">
       <div class="modal-content overflow-hidden">

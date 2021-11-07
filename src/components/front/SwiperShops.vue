@@ -1,7 +1,8 @@
 <template>
   <swiper :slidesPerView="1.2"
           :spaceBetween="15"
-          :breakpoints="breakpoints"
+          :autoplay="autoplay"
+          :breakpoints="breakpointsType"
           class="mySwiper">
     <swiper-slide v-for="shop in shops"
                   :key="shop.shop.title">
@@ -21,9 +22,28 @@ export default {
     BaseCardShop,
   },
   props: {
+    scroll: {
+      type: Boolean,
+      default: false,
+    },
     shops: {
       type: Array,
       default: () => [],
+    },
+  },
+  computed: {
+    breakpointsType() {
+      if (this.scroll) return this.breakpointsHorizotal;
+      return this.breakpoints;
+    },
+    autoplay() {
+      if (this.scroll) {
+        return {
+          delay: 3000,
+          disableOnInteraction: false,
+        };
+      }
+      return false;
     },
   },
   data() {
@@ -38,6 +58,16 @@ export default {
           spaceBetween: 20,
           slidesPerColumn: 3,
           slidesPerColumnFill: 'row',
+        },
+      },
+      breakpointsHorizotal: {
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 20,
+        },
+        992: {
+          slidesPerView: 3.5,
+          spaceBetween: 20,
         },
       },
     };

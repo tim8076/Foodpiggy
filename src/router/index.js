@@ -22,6 +22,11 @@ const routes = [
         component: () => import('../views/front/PageShop.vue'),
       },
       {
+        path: 'article/:article',
+        name: 'indexArticle',
+        component: () => import('../views/front/PageArticle.vue'),
+      },
+      {
         path: 'favorite',
         name: 'indexFavorite',
         component: () => import('../views/front/PageFavorite.vue'),

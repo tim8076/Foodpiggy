@@ -7,8 +7,6 @@ export default {
     final_total: 0,
     closeModal: false,
   },
-  getters: {
-  },
   actions: {
     getCartList({ commit, dispatch }) {
       commit('CHANGE_LOADING', true, { root: true });
