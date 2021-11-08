@@ -1,5 +1,5 @@
 <template>
-  <div class="page-category">
+  <div class="page-category d-flex flex-column">
     <div v-if="typeName"
          class="jumbotron bg-cover
                 d-flex justify-content-center align-items-center mb-12"
@@ -14,15 +14,29 @@
         `url(${require(`@/assets/images/index/categories/taiwanese/cover.jpg`)})` }">
       <h2 class="display-5 text-primary p-3 bg-secondary">精選美食</h2>
     </div>
-    <div class="container">
-      <h2 class="mb-3 fw-normal">餐廳列表</h2>
-      <div class="row" v-if="filterShops">
-        <div v-for="shop in filterShops"
-            :key="shop"
-            class="col-md-4 col-lg-3 mb-6">
-          <BaseCardShop :shop="shop" />
+    <div class="container d-flex flex-column flex-grow-1">
+      <template v-if="filterShops.length">
+        <h2 class="mb-3 fw-normal">餐廳列表</h2>
+        <ul class="row" v-if="filterShops">
+          <li v-for="shop in filterShops"
+              :key="shop"
+              class="col-md-4 col-lg-3 mb-6">
+            <BaseCardShop :shop="shop" />
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div class="d-flex flex-column justify-content-center align-items-center flex-grow-1">
+          <img :src="require('@/assets/images/logo/logo-pig.png')"
+                class="cart-logo mb-3"
+                alt="logo-image">
+          <h2 class="mb-3 fw-normal">沒有您找的餐廳?</h2>
+          <router-link :to="{ name: 'indexHome' }"
+                       class="btn btn-lg btn-primary">
+            回首頁逛逛
+          </router-link>
         </div>
-      </div>
+      </template>
     </div>
   </div>
 </template>
