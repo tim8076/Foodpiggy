@@ -1,6 +1,8 @@
 <template>
   <div class="page-home">
-    <SwiperJumbotron class="mb-8 mb-md-20"/>
+    <SwiperJumbotron class="mb-8 mb-md-20"
+                     :category="foodsCategory"
+                     :budgets="budget"/>
     <div class="container">
       <section class="mb-6 mb-lg-8">
         <SwiperNews :news="articles"/>
@@ -60,9 +62,19 @@ export default {
     ...mapGetters('frontProducts', [
       'shopList',
       'foodCategory',
+      'foodSubCategory',
       'hotShops',
       'newShops',
     ]),
+    foodsCategory() {
+      const subCategory = this.shopList.map((shop) => shop.subCategory);
+      const sub = [...new Set(subCategory)];
+      return [...this.foodCategory, ...sub];
+    },
+    budget() {
+      const price = this.shopList.map((shop) => shop.shop.price);
+      return [...new Set(price)].sort();
+    },
   },
   methods: {
     ...mapActions('localStorage', [

@@ -1,7 +1,8 @@
 <template>
   <div class="card card__category">
     <router-link class="link"
-                 :to="{ name: 'indexCategory', params: { category: type.type } }" />
+                 :to="{ name: 'indexCategory',
+                        query: { search: type.type }}" />
     <div class="card-body bg-primary px-1
         d-flex flex-column align-items-center justify-content-center">
       <img class="logo bg-white rounded-circle mb-3"

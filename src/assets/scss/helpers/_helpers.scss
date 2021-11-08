@@ -16,6 +16,11 @@
   background-image: url('./assets/images/logo/main-logo.png');
 }
 
+.min-height-128{
+  min-height: calc(100vh - 64px);
+}
+
+
 .swal2-container {
   z-index: 10000;
 }

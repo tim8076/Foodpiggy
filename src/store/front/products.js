@@ -48,7 +48,12 @@ export default {
     // 篩選出美食類別列表
     foodCategory(state, getters) {
       const categorys = getters.shopList.map((shop) => shop.category);
-      return categorys.filter((category, index, ary) => ary.indexOf(category) === index);
+      return new Set(categorys);
+    },
+    // 篩選出美食子類別列表
+    foodSubCategory(state) {
+      const subCategory = state.allProducts.map((product) => product.subCategory);
+      return new Set(subCategory);
     },
     // 篩選出12間 4顆星以上的餐廳
     hotShops(state, getters) {

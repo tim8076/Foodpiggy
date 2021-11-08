@@ -20,8 +20,9 @@ export default {
   },
   props: {
     categories: {
-      type: Array,
+      type: Set,
       default: () => [],
+      required: true,
     },
   },
   computed: {

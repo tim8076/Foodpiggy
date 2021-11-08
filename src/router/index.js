@@ -12,7 +12,7 @@ const routes = [
         component: () => import('../views/front/PageHome.vue'),
       },
       {
-        path: 'category/:category',
+        path: 'category',
         name: 'indexCategory',
         component: () => import('../views/front/PageCategory.vue'),
       },

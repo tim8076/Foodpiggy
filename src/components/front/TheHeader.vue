@@ -80,7 +80,7 @@ export default {
       this.updateCartNum({ id, qty });
     },
     async deleteCart({ id, title }) {
-      const res = await this.$_swalComfirm(`確認刪除 ${title} `);
+      const res = await this.$_swalComfirm(`確認刪除 ${title}`);
       if (res.isConfirmed) this.deleteCartItem({ id });
     },
   },
