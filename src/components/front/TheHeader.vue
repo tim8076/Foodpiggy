@@ -32,7 +32,8 @@
                    :carts="cartList"
                    :final-total="final_total"
                    @updateCartNum="updateCart"
-                   @deleteCart="deleteCart"/>
+                   @deleteCart="deleteCart"
+                   @deleteAll="deleteAllCart"/>
   </div>
 </template>
 
@@ -60,6 +61,7 @@ export default {
       'getCartList',
       'updateCartNum',
       'deleteCartItem',
+      'deleteAllCartItems',
     ]),
     scrollHandler() {
       if (window.scrollY > 0) {
@@ -82,6 +84,10 @@ export default {
     async deleteCart({ id, title }) {
       const res = await this.$_swalComfirm(`確認刪除 ${title}`);
       if (res.isConfirmed) this.deleteCartItem({ id });
+    },
+    async deleteAllCart() {
+      const res = await this.$_swalComfirm('確認清空購物車');
+      if (res.isConfirmed) this.deleteAllCartItems();
     },
   },
   mounted() {

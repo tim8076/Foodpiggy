@@ -17,7 +17,8 @@
       <template v-if="cartData.length">
         <div  v-for="cart in cartData"
             :key="cart.id"
-            class="position-relative d-flex align-items-center mb-3 mb-md-6 bg-secondary border">
+            class="position-relative d-flex align-items-center mb-3 mb-md-6
+                   shadow-sm">
           <img class="offcanvas-image img-cover me-3"
               :src="cart.product.imageUrl">
           <div class="d-flex flex-column justify-content-between w-100 w-md-100">
@@ -36,7 +37,7 @@
             <button class="btn p-0 border-0"
                     type="button"
                     v-else
-                    @click="$emit('updateCartNum', { id: cart.id, qty: cart.qty - 1 })">
+                    @click.prevent="$emit('updateCartNum', { id: cart.id, qty: cart.qty - 1 })">
               <i class="fas fa-minus fs-3 text-primary"></i>
             </button>
             <input type="text"
@@ -47,7 +48,7 @@
                   @blur="$emit('updateCartNum', { id: cart.id, qty: cart.qty })">
             <button class="btn p-0 border-0"
                     type="button"
-                    @click="$emit('updateCartNum', { id: cart.id, qty: cart.qty + 1 })">
+                    @click.prevent="$emit('updateCartNum', { id: cart.id, qty: cart.qty + 1 })">
               <i class="fas fa-plus fs-3 text-primary"></i>
             </button>
           </div>
@@ -75,8 +76,13 @@
         <p class="text-primary fw-bold fs-2"> $ {{ finalTotal }}</p>
       </div>
       <div>
-        <router-link to="/"
-                   class="btn btn-primary">
+        <button class="btn btn-outline-primary me-2"
+                type="button"
+                @click.prevent="$emit('deleteAll')">
+          清空購物車
+        </button>
+        <router-link :to="{ name: 'indexOrder' }"
+                     class="btn btn-primary">
           前往結帳
         </router-link>
       </div>
@@ -88,7 +94,10 @@
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 
 export default {
-  emits: ['updateCartNum'],
+  emits: ['updateCartNum',
+    'deleteCart',
+    'deleteAll',
+  ],
   props: {
     carts: {
       type: Array,

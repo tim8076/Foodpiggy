@@ -1,0 +1,44 @@
+// 進度條
+.c-progress{
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  &__item{
+    color: $white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+      font-size: 0.875rem;
+    }
+  }
+  &__item:not(:first-child)::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    height: 5px;
+    background-color: $primary;
+    z-index: -1;
+  }
+  &__item:nth-child(2)::before{
+    left: 0;
+  }
+  &__item:nth-child(3)::before{
+    left: 50%;
+  }
+  &__item.active ~ &__item{
+    background-color: $gray-500;
+  }
+  &__item.active ~ &__item::before{
+    background-color: $gray-500;
+  }
+}

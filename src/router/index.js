@@ -22,6 +22,16 @@ const routes = [
         component: () => import('../views/front/PageShop.vue'),
       },
       {
+        path: 'order',
+        name: 'indexOrder',
+        component: () => import('../views/front/PageOrder.vue'),
+      },
+      {
+        path: 'checkout/:orderId',
+        name: 'indexCheckout',
+        component: () => import('../views/front/PageCheckout.vue'),
+      },
+      {
         path: 'article/:article',
         name: 'indexArticle',
         component: () => import('../views/front/PageArticle.vue'),
