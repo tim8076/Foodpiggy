@@ -73,54 +73,75 @@
           <h3 class="fs-4 mb-4 text-primary">
             <i class="fas fa-user-alt me-3"></i>訂購人資料
           </h3>
-          <form>
+          <Form @submit="sendForm" v-slot="{ errors }">
             <div class="mb-3">
               <label for="name" class="form-label">姓名</label>
-              <input type="text"
+              <Field type="text"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['name'] }"
                     v-model.trim="user.name"
                     id="name"
-                    placeholder="ex: 王小明">
+                    name="name"
+                    rules="required"
+                    placeholder="ex: 王小明" />
+              <ErrorMessage name="name"
+                            class="text-danger"/>
             </div>
             <div class="mb-3">
               <label for="tel" class="form-label">電話</label>
-              <input type="tel"
+              <Field type="tel"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['tel'] }"
                     v-model.trim="user.tel"
                     id="tel"
-                    placeholder="ex: 0905166333">
+                    name="tel"
+                    :rules="isPhone"
+                    placeholder="ex: 0905166333" />
+              <ErrorMessage name="tel"
+                            class="text-danger"/>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">email</label>
-              <input type="email"
+              <Field type="email"
                     class="form-control"
                     v-model.trim="user.email"
                     id="email"
-                    placeholder="ex: abc@gmail.com">
+                    name="email"
+                    rules="required|email"
+                    placeholder="ex: abc@gmail.com" />
+              <ErrorMessage name="email"
+                            class="text-danger"/>
             </div>
             <div class="mb-3">
               <label for="payment" class="form-label">付款方式</label>
               <select id="payment"
                       class="form-select"
                       v-model="user.payment">
+                <option value="" selected disabled>選擇付款方式</option>
                 <option value="現金">現金</option>
                 <option value="信用卡">信用卡</option>
               </select>
             </div>
             <div class="mb-6">
               <label for="address" class="form-label">地址</label>
-              <input type="text"
+              <Field type="text"
                     class="form-control"
                     v-model.trim="user.address"
                     id="address"
-                    placeholder="ex: 台北市大安區中山路一段">
+                    name="address"
+                    rules="required"
+                    placeholder="ex: 台北市大安區中山路一段" />
+              <ErrorMessage name="address"
+                            class="text-danger"/>
             </div>
-            <button type="button"
-                    class="btn btn-primary w-100"
-                    @click.prevent="sendForm">
-              建立訂單
-            </button>
-          </form>
+            <div :class="{ 'cursor-not-allowed' : isValid }">
+              <button type="submit"
+                      :class="{ 'disabled' : isValid }"
+                      class="btn btn-primary w-100">
+                建立訂單
+              </button>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
@@ -150,12 +171,19 @@ export default {
       'total',
       'final_total',
     ]),
+    isValid() {
+      return Object.values(this.user).some((item) => item === '');
+    },
   },
   methods: {
     ...mapActions('frontOrder', [
       'sendOrder',
       'chcekoutOrder',
     ]),
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/;
+      return phoneNumber.test(value) ? true : '電話號碼格式錯誤';
+    },
     async sendForm() {
       const data = {
         user: this.user,

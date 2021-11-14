@@ -81,10 +81,11 @@
                 @click.prevent="$emit('deleteAll')">
           清空購物車
         </button>
-        <router-link :to="{ name: 'indexOrder' }"
-                     class="btn btn-primary">
+        <button type="button"
+                class="btn btn-primary"
+                @click.prevent="goCheckout">
           前往結帳
-        </router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -133,6 +134,10 @@ export default {
     goShop() {
       this.hideCanvas();
       this.$router.push('/index/home');
+    },
+    goCheckout() {
+      this.hideCanvas();
+      this.$router.push('/index/order');
     },
   },
   mounted() {

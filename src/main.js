@@ -6,6 +6,12 @@ import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'bootstrap';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import {
+  Field, Form, ErrorMessage, defineRule, configure,
+} from 'vee-validate';
+import { required, email, min } from '@vee-validate/rules';
+import { localize } from '@vee-validate/i18n';
+import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json';
 
 // import Swiper core and required modules
 import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper';
@@ -40,4 +46,16 @@ app.use(VueAxios, axios);
 app.component('Loading', Loading);
 app.component('Swiper', Swiper);
 app.component('SwiperSlide', SwiperSlide);
+
+// vee-validation
+app.component('Form', Form);
+app.component('Field', Field);
+app.component('ErrorMessage', ErrorMessage);
+defineRule('required', required);
+defineRule('email', email);
+defineRule('min', min);
+configure({
+  generateMessage: localize('zh_TW', zhTW),
+});
+
 app.mount('#app');
