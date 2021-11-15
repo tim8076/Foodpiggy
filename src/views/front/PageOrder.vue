@@ -104,6 +104,7 @@
               <label for="email" class="form-label">email</label>
               <Field type="email"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['email'] }"
                     v-model.trim="user.email"
                     id="email"
                     name="email"
@@ -114,18 +115,25 @@
             </div>
             <div class="mb-3">
               <label for="payment" class="form-label">付款方式</label>
-              <select id="payment"
-                      class="form-select"
-                      v-model="user.payment">
+              <Field id="payment"
+                     class="form-select"
+                     :class="{ 'is-invalid' : errors['payment'] }"
+                     name="payment"
+                     rules="required"
+                     v-model="user.payment"
+                     as="select">
                 <option value="" selected disabled>選擇付款方式</option>
                 <option value="現金">現金</option>
                 <option value="信用卡">信用卡</option>
-              </select>
+              </Field>
+              <ErrorMessage name="payment"
+                            class="text-danger"/>
             </div>
             <div class="mb-6">
               <label for="address" class="form-label">地址</label>
               <Field type="text"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['address'] }"
                     v-model.trim="user.address"
                     id="address"
                     name="address"

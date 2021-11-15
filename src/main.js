@@ -56,6 +56,7 @@ defineRule('email', email);
 defineRule('min', min);
 configure({
   generateMessage: localize('zh_TW', zhTW),
+  validateOnInput: true,
 });
 
 app.mount('#app');
