@@ -8,7 +8,7 @@
         </router-link>
       </li>
       <li class="sidebar-list__item mb-8 fs-4">
-        <router-link to="/">
+        <router-link :to="{ name: 'dashboardOrders' }">
           <i class="fas fa-list me-2"></i>
           訂單列表
         </router-link>

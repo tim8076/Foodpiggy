@@ -59,6 +59,11 @@ const routes = [
         component: () => import('../views/back/PageProductList.vue'),
       },
       {
+        path: 'orders',
+        name: 'dashboardOrders',
+        component: () => import('../views/back/PageOrderlist.vue'),
+      },
+      {
         path: 'articles',
         name: 'dashboardArticles',
         component: () => import('../views/back/PageArticle.vue'),

@@ -9,6 +9,7 @@ import localStorage from './front/localStorage';
 
 // 後台模組
 import adminProductlists from './back/products';
+import adminOrderlist from './back/orders';
 import adminArticles from './back/articles';
 
 export default createStore({
@@ -62,6 +63,7 @@ export default createStore({
     frontArticle,
     localStorage,
     adminProductlists,
+    adminOrderlist,
     adminArticles,
   },
 });

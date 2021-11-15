@@ -84,7 +84,7 @@
 
 <script>
 import { mapState, mapActions, mapGetters } from 'vuex';
-import ProductModal from '@/components/back/ProductModal.vue';
+import ProductModal from '@/components/back/ModalProduct.vue';
 import BasePagination from '@/components/BasePagination.vue';
 
 export default {
@@ -182,19 +182,18 @@ export default {
     toggleShopData() {
       this.getShop = !this.getShop;
     },
-    setItems() {
-      const vm = this;
-      this.allProducts.forEach((item) => {
-        const product = item;
-        product.shop.comments = [];
-        vm.updateProduct({ tempProduct: product, isNew: false });
-      });
-    },
+    // setItems() {
+    //   const vm = this;
+    //   this.allProducts.forEach((item) => {
+    //     const product = item;
+    //     product.shop.comments = [];
+    //     vm.updateProduct({ tempProduct: product, isNew: false });
+    //   });
+    // },
   },
   async created() {
     await this.getProducts();
     await this.getAllProducts();
-    this.setItems();
   },
 };
 </script>
