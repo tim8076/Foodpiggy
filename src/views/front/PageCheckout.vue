@@ -32,7 +32,7 @@
             <i class="fas fa-clipboard-list me-3"></i>您的訂單
           </h3>
           <ul class="border-bottom mb-3">
-            <li v-for="product in order.products"
+            <li v-for="product in products"
                 :key="product.id"
                 class="mb-3">
                 <div class="d-flex justify-content-between align-items-center">
@@ -42,6 +42,17 @@
                 <p class="text-end text-gray-dark">$ {{ product.total }}</p>
             </li>
           </ul>
+          <template v-if="useCoupon">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="fs-5 text-primary">總計</h4>
+              <p class="text-decoration-line-through">{{ originTotal }}</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3
+                        text-gray-dark">
+              <h4 class="fs-5 fw-normal">折扣</h4>
+              <p>{{ discount }}</p>
+            </div>
+          </template>
           <div class="d-flex justify-content-between align-items-center">
             <h4 class="fs-5 text-primary">小計</h4>
             <p>{{ order.total }}</p>
@@ -93,6 +104,21 @@ export default {
     ]),
     user() {
       return this.order.user;
+    },
+    products() {
+      return Object.values(this.order.products);
+    },
+    useCoupon() {
+      if (this.products[0].total !== this.products[0].final_total) return true;
+      return false;
+    },
+    discount() {
+      return this.products.reduce(
+        (total, product) => total + product.total - product.final_total, 0,
+      );
+    },
+    originTotal() {
+      return this.order.total + this.discount;
     },
   },
   methods: {

@@ -37,17 +37,34 @@
           </ul>
           <div class="d-flex justify-content-between align-items-center text-primary mb-2">
             <h4 class="fs-5">小計</h4>
-            <p class="fw-bold">${{ total }}</p>
+            <p class="fw-bold"
+               :class="{ 'text-decoration-line-through' : couponUsed }">
+               ${{ total }}
+            </p>
+          </div>
+          <div v-if="couponUsed"
+               class="d-flex justify-content-between align-items-center mb-2
+                      text-gray-dark">
+            <h4 class="fs-5 fw-normal">折扣</h4>
+            <p>${{ discount }}</p>
           </div>
           <button type="button"
                   class="btn p-0 mb-3"
                   @click.prevent="is_coupon = true">
             使用優惠券?
           </button>
-          <input v-if="is_coupon"
-                  type="text"
-                  class="form-control mb-3"
-                  placeholder="請輸入優惠券代碼">
+          <div class="input-group mb-3"
+               v-if="is_coupon">
+            <input type="text"
+                   class="form-control"
+                   placeholder="請輸入優惠券代碼"
+                   v-model.trim="couponCode">
+            <button class="btn btn-outline-primary"
+                    type="button"
+                    @click.prevent="sendCoupon">
+              套用
+            </button>
+          </div>
           <div class="d-flex justify-content-between align-items-center text-primary mb-2">
             <h4 class="fs-5">總計</h4>
             <p class="fw-bold">${{ final_total }}</p>
@@ -163,6 +180,7 @@ export default {
   data() {
     return {
       is_coupon: false,
+      couponCode: '',
       user: {
         name: '',
         email: '',
@@ -179,6 +197,13 @@ export default {
       'total',
       'final_total',
     ]),
+    couponUsed() {
+      if (this.final_total !== this.total) return true;
+      return false;
+    },
+    discount() {
+      return this.total - this.final_total;
+    },
     isValid() {
       return Object.values(this.user).some((item) => item === '');
     },
@@ -187,6 +212,7 @@ export default {
     ...mapActions('frontOrder', [
       'sendOrder',
       'chcekoutOrder',
+      'useCoupon',
     ]),
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/;
@@ -206,6 +232,9 @@ export default {
       } catch (err) {
         this.$_swal(err, 'error');
       }
+    },
+    sendCoupon() {
+      this.useCoupon({ code: this.couponCode });
     },
   },
 };

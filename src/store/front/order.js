@@ -49,6 +49,26 @@ export default {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },
+    useCoupon({ commit, dispatch }, { code }) {
+      commit('CHANGE_LOADING', true, { root: true });
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/coupon`;
+      axios.post(api, {
+        data: { code },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            dispatch('callSwal', { msg: res.data.message }, { root: true });
+          } else {
+            dispatch('callSwal', { msg: res.data.message, icon: 'error' }, { root: true });
+          }
+        })
+        .catch((err) => {
+          dispatch('callSwal', { msg: err, icon: 'error' }, { root: true });
+        })
+        .finally(() => {
+          commit('CHANGE_LOADING', false, { root: true });
+        });
+    },
   },
   mutations: {
     SET_ORDER(state, payload) {
