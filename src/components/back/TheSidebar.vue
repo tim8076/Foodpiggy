@@ -20,7 +20,7 @@
         </router-link>
       </li>
       <li class="sidebar-list__item mb-8 fs-4">
-        <router-link to="/">
+        <router-link :to="{ name: 'dashboardCoupon' }">
           <i class="fas fa-ticket-alt me-2"></i>
           優惠券
         </router-link>

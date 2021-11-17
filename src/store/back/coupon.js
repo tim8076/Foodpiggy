@@ -3,19 +3,18 @@ import axios from 'axios';
 export default {
   namespaced: true,
   state: {
-    articles: [],
+    coupons: [],
     pagination: {},
   },
   actions: {
-    // 取得所有文章(有分頁)
-    getArticles({ commit, dispatch }, page = 1) {
+    getCoupons({ commit, dispatch }, page = 1) {
       commit('CHANGE_LOADING', true, { root: true });
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`;
       axios.get(api)
         .then((res) => {
           if (res.data.success) {
-            commit('SET_ARTICLES', res.data);
-            commit('SET_PAGINATION', res.data);
+            commit('SET_COUPONS', res.data.coupons);
+            commit('SET_PAGINATION', res.data.pagination);
           } else {
             dispatch('callSwal', { msg: res.data.message, icon: 'error' }, { root: true });
           }
@@ -27,27 +26,21 @@ export default {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },
-    // 取得單一文章
-    getArticle(context, { id }) {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
-      return axios.get(api);
-    },
-    // 新增與編輯文章
-    updateArticle({ commit, dispatch }, { tempArticle, isNew }) {
+    updateCoupon({ commit, dispatch }, { coupon, isNew }) {
       commit('CHANGE_LOADING', true, { root: true });
-      let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article`;
+      let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon`;
       let httpMethod = 'post';
       if (!isNew) {
-        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${tempArticle.id}`;
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${coupon.id}`;
         httpMethod = 'put';
       }
       axios[httpMethod](api, {
-        data: tempArticle,
+        data: coupon,
       })
         .then((res) => {
           if (res.data.success) {
             dispatch('callSwal', { msg: res.data.message }, { root: true });
-            dispatch('getArticles');
+            dispatch('getCoupons');
           } else {
             dispatch('callSwal', { msg: res.data.message, icon: 'error' }, { root: true });
           }
@@ -59,15 +52,14 @@ export default {
           commit('CHANGE_LOADING', false, { root: true });
         });
     },
-    // 刪除單一文章
-    deleteArticle({ commit, dispatch }, { id }) {
+    deleteCoupon({ commit, dispatch }, { id }) {
       commit('CHANGE_LOADING', true, { root: true });
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/article/${id}`;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/coupon/${id}`;
       axios.delete(api)
         .then((res) => {
           if (res.data.success) {
             dispatch('callSwal', { msg: res.data.message }, { root: true });
-            dispatch('getArticles');
+            dispatch('getCoupons');
           } else {
             dispatch('callSwal', { msg: res.data.message, icon: 'error' }, { root: true });
           }
@@ -81,14 +73,11 @@ export default {
     },
   },
   mutations: {
-    // SET_ARTICLE(state, payload) {
-    //   state.article = payload.article;
-    // },
-    SET_ARTICLES(state, payload) {
-      state.articles = payload.articles;
+    SET_COUPONS(state, payload) {
+      state.coupons = payload;
     },
     SET_PAGINATION(state, payload) {
-      state.pagination = payload.pagination;
+      state.pagination = payload;
     },
   },
 };

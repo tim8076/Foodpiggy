@@ -68,6 +68,11 @@ const routes = [
         name: 'dashboardArticles',
         component: () => import('../views/back/PageArticle.vue'),
       },
+      {
+        path: 'coupon',
+        name: 'dashboardCoupon',
+        component: () => import('../views/back/PageCoupon.vue'),
+      },
     ],
   },
 ];

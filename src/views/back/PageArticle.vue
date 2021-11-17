@@ -20,7 +20,7 @@
         </button>
       </div>
     </div>
-     <table class="table bg-light">
+    <table class="table bg-light">
       <thead>
         <tr>
           <th scope="col" width="150">文章分類</th>

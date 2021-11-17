@@ -10,6 +10,7 @@ import localStorage from './front/localStorage';
 // 後台模組
 import adminProductlists from './back/products';
 import adminOrderlist from './back/orders';
+import adminCoupon from './back/coupon';
 import adminArticles from './back/articles';
 
 export default createStore({
@@ -65,5 +66,6 @@ export default createStore({
     adminProductlists,
     adminOrderlist,
     adminArticles,
+    adminCoupon,
   },
 });

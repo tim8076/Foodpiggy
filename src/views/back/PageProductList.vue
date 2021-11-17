@@ -182,14 +182,6 @@ export default {
     toggleShopData() {
       this.getShop = !this.getShop;
     },
-    // setItems() {
-    //   const vm = this;
-    //   this.allProducts.forEach((item) => {
-    //     const product = item;
-    //     product.shop.comments = [];
-    //     vm.updateProduct({ tempProduct: product, isNew: false });
-    //   });
-    // },
   },
   async created() {
     await this.getProducts();
