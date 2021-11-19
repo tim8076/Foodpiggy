@@ -12,7 +12,6 @@ export default {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/article/${id}`;
       axios.get(api)
         .then((res) => {
-          console.log(res);
           if (res.data.success) {
             commit('SET_ARTICLE', res.data);
           } else {

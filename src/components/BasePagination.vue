@@ -6,38 +6,26 @@
       <a class="page-link"
          href="#"
          aria-label="Previous"
-         @click.prevent="updatePage(pages.current_page - 1)">
+         @click.prevent="updatePage(tempPage.current_page - 1)">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <template v-if="pages.total_pages < 5">
-      <li class="page-item"
-          v-for="page in pages.total_pages"
-          :key="page"
-          @click.prevent="updatePage(page)"
-          :class= "{ active : page === pages.current_page }">
-        <a class="page-link" href="#">
-          {{ page }}
-        </a>
-      </li>
-    </template>
-    <template v-else>
-      <li class="page-item"
-          v-for="page in prevsPages"
-          :key="page"
-          @click.prevent="updatePage(page)"
-          :class= "{ active : page === pages.current_page }">
-        <a class="page-link" href="#">
-          {{ page }}
-        </a>
-      </li>
-    </template>
+    <li class="page-item">
+      <select class="form-select"
+              @change="updatePage($event.target.value)"
+              v-model="tempPage.current_page">
+        <option v-for="page in tempPage.total_pages"
+                :key="page"
+                :value="page">{{ page }}
+        </option>
+      </select>
+    </li>
     <li class="page-item"
         :class="{ disabled : !pages.has_next }">
       <a class="page-link"
          href="#"
          aria-label="Next"
-         @click.prevent="updatePage(pages.current_page + 1)">
+         @click.prevent="updatePage(tempPage.current_page + 1)">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
@@ -53,20 +41,22 @@ export default {
       required: true,
     },
   },
-  computed: {
-    prevsPages() {
-      const pages = [];
-      const total = this.pages.total_pages;
-      const current = this.pages.current_page;
-      for (let i = current; i <= total && i < current + 3; i += 1) {
-        pages.push(i);
-      }
-      return pages;
-    },
+  data() {
+    return {
+      tempPage: {},
+    };
   },
   methods: {
     updatePage(page) {
       this.$emit('emitPage', page);
+    },
+  },
+  watch: {
+    pages: {
+      immediate: true,
+      handler() {
+        this.tempPage = { ...this.pages };
+      },
     },
   },
 };

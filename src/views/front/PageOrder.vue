@@ -209,6 +209,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions('frontCart', [
+      'getCartList',
+    ]),
     ...mapActions('frontOrder', [
       'sendOrder',
       'chcekoutOrder',
@@ -227,7 +230,10 @@ export default {
         const res = await this.sendOrder(data);
         if (res.data.success) {
           await this.chcekoutOrder({ id: res.data.orderId });
+          await this.getCartList();
           this.$router.push(`/index/checkout/${res.data.orderId}`);
+        } else {
+          this.$_swal(res.data.message, 'error');
         }
       } catch (err) {
         this.$_swal(err, 'error');

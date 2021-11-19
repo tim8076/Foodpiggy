@@ -40,6 +40,7 @@
                     <input type="number"
                            min="1"
                            class="form-control text-center"
+                           @change="setOrderNum(orderNum)"
                            v-model.number="orderNum">
                     <button class="btn btn-secondary text-gray-dark"
                             type="button"
@@ -97,7 +98,11 @@ export default {
   },
   methods: {
     setOrderNum(num) {
-      if (this.orderNum < 1) return;
+      if (this.orderNum < 1) {
+        this.$_swal('訂購數量小於1', 'error');
+        this.orderNum = 1;
+        return;
+      }
       this.orderNum += num;
     },
     comfirmOrder() {

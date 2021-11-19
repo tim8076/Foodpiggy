@@ -29,7 +29,7 @@ export default {
     updateOrder({ dispatch, commit }, payload) {
       commit('CHANGE_LOADING', true, { root: true });
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/order/${payload.id}`;
-      axios.put(api, payload)
+      axios.put(api, { data: payload })
         .then((res) => {
           if (res.data.success) {
             dispatch('callSwal', { msg: res.data.message }, { root: true });

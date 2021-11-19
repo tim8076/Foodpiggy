@@ -73,8 +73,9 @@
       </tbody>
     </table>
     <BasePagination :pages="pagination"
+                    v-if="JSON.stringify(pagination) !== '{}'"
                     @emit-page="getProducts"
-                    v-show="!searchText"/>
+                    v-show="!searchText || !getShop"/>
     <ProductModal ref="productModal"
                   :isNew="isNew"
                   :product="tempProduct"
@@ -183,9 +184,9 @@ export default {
       this.getShop = !this.getShop;
     },
   },
-  async created() {
-    await this.getProducts();
-    await this.getAllProducts();
+  created() {
+    this.getProducts();
+    this.getAllProducts();
   },
 };
 </script>

@@ -149,7 +149,7 @@ export default {
   },
   methods: {
     sendOrder() {
-      this.$emit('sendOrder', this.tempOrder);
+      this.$emit('sendOrder', { ...this.tempOrder });
     },
   },
 };
