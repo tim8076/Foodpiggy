@@ -15,28 +15,44 @@
           <h2 class="fs-1 text-primary">隨點隨到 <br>最方便的美食外送平台</h2>
         </div>
         <div class="login-panel col-md-6 mx-md-auto col-lg-4 py-12">
-          <form @submit.prevent="signIn">
+          <Form @submit="signIn" v-slot="{ errors }">
             <h2 class="text-center">登入</h2>
-            <div class="mb-4">
-              <label class="mb-1" for="email">Email</label>
-              <input type="email"
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <Field type="email"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['email'] }"
+                    v-model.trim="user.username"
                     id="email"
-                    required
-                    v-model.trim="user.username">
+                    name="email"
+                    rules="required|email"
+                    placeholder="請輸入帳號"
+                    autocomplete="email" />
+              <ErrorMessage name="email"
+                            class="text-danger"/>
             </div>
-            <div class="mb-8">
-              <label class="mb-1" for="password">密碼</label>
-              <input type="password"
+            <div class="mb-6">
+              <label for="password" class="form-label">密碼</label>
+              <Field type="password"
                     class="form-control"
+                    :class="{ 'is-invalid' : errors['password'] }"
+                    v-model.trim="user.password"
                     id="password"
-                    required
-                    v-model.trim="user.password">
+                    name="password"
+                    rules="required"
+                    placeholder="請輸入密碼"
+                    autocomplete="current-password"/>
+              <ErrorMessage name="password"
+                            class="text-danger"/>
             </div>
-            <input type="submit"
+            <div class="div"
+                 :class="{ 'cursor-not-allowed' : isValid }">
+              <input type="submit"
                    class="btn btn-primary w-100"
+                   :class="{ 'disabled' : isValid }"
                    value="登入">
-          </form>
+            </div>
+          </Form>
         </div>
       </div>
     </div>
@@ -52,6 +68,11 @@ export default {
         password: '',
       },
     };
+  },
+  computed: {
+    isValid() {
+      return Object.values(this.user).some((item) => item === '');
+    },
   },
   methods: {
     async signIn() {

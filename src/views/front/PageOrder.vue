@@ -100,7 +100,8 @@
                     id="name"
                     name="name"
                     rules="required"
-                    placeholder="ex: 王小明" />
+                    placeholder="ex: 王小明"
+                    autocomplete="name" />
               <ErrorMessage name="name"
                             class="text-danger"/>
             </div>
@@ -113,7 +114,8 @@
                     id="tel"
                     name="tel"
                     :rules="isPhone"
-                    placeholder="ex: 0905166333" />
+                    placeholder="ex: 0905166333"
+                    autocomplete="tel" />
               <ErrorMessage name="tel"
                             class="text-danger"/>
             </div>
@@ -126,7 +128,8 @@
                     id="email"
                     name="email"
                     rules="required|email"
-                    placeholder="ex: abc@gmail.com" />
+                    placeholder="ex: abc@gmail.com"
+                    autocomplete="email" />
               <ErrorMessage name="email"
                             class="text-danger"/>
             </div>
@@ -155,7 +158,8 @@
                     id="address"
                     name="address"
                     rules="required"
-                    placeholder="ex: 台北市大安區中山路一段" />
+                    placeholder="ex: 台北市大安區中山路一段"
+                    autocomplete="street-address"/>
               <ErrorMessage name="address"
                             class="text-danger"/>
             </div>
